@@ -207,21 +207,21 @@ The system will assume that relevant biographical information, if it exists, is 
 
 The system will trigger automated research based on specific conditions rather than researching every case:
 
-**Always Research When**:
+1. **Always Research When**:
 
 - Initial match probability between 40-80% (ambiguous cases)
 - Common names (frequency analysis of applicant database) with match probability >30%
 - High name similarity (>85%) but low contextual confidence (<60%)
 - Multiple potential matches identified in single article
 
-**Never Research When**:
+2. **Never Research When**:
 
 - Clear negative matches (<30% probability) - research unlikely to change outcome
 - Clear positive matches (>80% probability) - additional context not needed for decision
 - Previous research conducted within 90 days (cached results available)
 
-**Gap Analysis**:
-The system will identify specific types of missing information that could improve disambiguation:
+3. **Gap Analysis**:
+   The system will identify specific types of missing information that could improve disambiguation:
 
 - **Critical gaps**: Full legal names, dates of birth, unique identifiers
 - **Important gaps**: Current occupation, company affiliations, educational background
@@ -254,20 +254,20 @@ The system will identify specific types of missing information that could improv
 
 #### Search Query Optimization
 
-**Context-Driven Query Generation**:
-Searches will be tailored based on available context rather than using generic queries:
+1. **Context-Driven Query Generation**:
+   Searches will be tailored based on available context rather than using generic queries:
 
 - **With company context**: "John Smith" + "Goldman Sachs" + "Executive"
 - **With location context**: "John Smith" + "New York" + "CEO"
 - **With industry context**: "John Smith" + "Technology" + "Startup"
 
-**Progressive Search Refinement**:
+2. **Progressive Search Refinement**:
 
 - Start with highly specific queries using all available context
 - Gradually broaden search terms if initial queries yield insufficient results
 - Stop searching when reliable information found or search quota exceeded
 
-**Negative Result Recognition**:
+3. **Negative Result Recognition**:
 
 - Cache unsuccessful search attempts to avoid repeating expensive queries
 - Recognize when common names require additional context for meaningful results
@@ -277,15 +277,15 @@ Searches will be tailored based on available context rather than using generic q
 
 #### Multi-Source Cross-Referencing
 
-**Consensus Building**:
-The system will use a weighted consensus approach when multiple sources provide conflicting information:
+1. **Consensus Building**:
+   The system will use a weighted consensus approach when multiple sources provide conflicting information:
 
 - **Source reliability weighting**: SEC filings weighted higher than social media
 - **Recency preference**: More recent information preferred for current status
 - **Corroboration bonus**: Information confirmed by multiple independent sources receives higher confidence
 
-**Contradiction Detection**:
-The system will actively identify contradictory information across sources:
+2. **Contradiction Detection**:
+   The system will actively identify contradictory information across sources:
 
 - **Temporal impossibilities**: Birth dates that don't align with career timelines
 - **Geographic conflicts**: Simultaneous presence in different locations
@@ -293,21 +293,21 @@ The system will actively identify contradictory information across sources:
 
 #### Information Quality Scoring
 
-**Confidence Calculation Framework**:
-Each piece of extracted information will receive a confidence score based on:
+1. **Confidence Calculation Framework**:
+   Each piece of extracted information will receive a confidence score based on:
 
 - **Source authority** (SEC filing = 0.95, LinkedIn = 0.80, blog post = 0.30)
 - **Information specificity** (exact date = higher than approximate)
 - **Corroboration level** (confirmed by multiple sources = higher confidence)
 - **Extraction certainty** (structured data = higher than inferred information)
 
-**Quality Thresholds**:
+2. **Quality Thresholds**:
 
 - **High confidence**: >0.85 (suitable for automated decision enhancement)
 - **Medium confidence**: 0.60-0.85 (flagged for human review)
 - **Low confidence**: <0.60 (logged but not used for decision making)
 
-#### Temporal Consistency Validation
+#### Temporal Consistency Validation:
 
 - Career timeline logic: Education align with professional roles
 - Age consistency: Professional achievements align with plausible ages
@@ -317,17 +317,15 @@ Each piece of extracted information will receive a confidence score based on:
 
 #### Enhanced Matching Pipeline
 
-**Conditional Research Activation**:
-Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
+1. **Conditional Research Activation**: Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
 
 1. **Initial screening** produces ambiguous result (40-80% confidence)
-2. **Gap analysis** identifies specific missing information types
-3. **Research orchestrator** executes targeted searches based on gaps
-4. **Information validator** processes and validates findings
-5. **Enhanced matcher** re-evaluates with enriched biographical context
+1. **Gap analysis** identifies specific missing information types
+1. **Research orchestrator** executes targeted searches based on gaps
+1. **Information validator** processes and validates findings
+1. **Enhanced matcher** re-evaluates with enriched biographical context
 
-**Confidence Score Integration**:
-Enriched information will be integrated into the matching confidence calculation:
+1. **Confidence Score Integration**: Enriched information will be integrated into the matching confidence calculation:
 
 - **Supporting evidence**: Biographical alignment increases match confidence
 - **Contradictory evidence**: Inconsistencies decrease match confidence
@@ -335,48 +333,46 @@ Enriched information will be integrated into the matching confidence calculation
 
 #### Decision Enhancement Logic
 
-**Positive Reinforcement**:
-When enriched biographical data supports a potential match:
+1. **Positive Reinforcement**:
+   When enriched biographical data supports a potential match:
 
 - **Age alignment**: Article age references match calculated age from birth date
 - **Occupational consistency**: Professional background aligns with article context
 - **Geographic coherence**: Location history consistent with article geography
 
-**Negative Evidence Processing**:
-When enriched data contradicts a potential match:
+2. **Negative Evidence Processing**:
+   When enriched data contradicts a potential match:
 
 - **Age inconsistency**: Significant discrepancy between article age and calculated age
 - **Professional contradiction**: Career background incompatible with article context
 - **Geographic impossibility**: Location history incompatible with article events
 
-### Performance Monitoring and Optimization
+### Key Performance Indicators
 
-#### Key Performance Indicators
-
-**Research Effectiveness Metrics**:
+1. **Research Effectiveness Metrics**:
 
 - **Information completion rate**: Percentage of cases successfully enriched with biographical data
 - **Disambiguation success rate**: Percentage of ambiguous cases resolved through research
 - **Source hit rate**: Success rate for different source types in providing useful information
 - **Research time efficiency**: Average time required for information extraction per case
 
-**Business Impact Metrics**:
+2. **Business Impact Metrics**:
 
 - **False positive reduction**: Decrease in false positives attributable to enriched information
 - **Analyst time savings**: Reduction in manual research time per case
 - **Decision confidence improvement**: Average increase in matching confidence scores
 - **Regulatory compliance score**: Percentage of cases with complete audit trails
 
-#### Continuous Improvement Framework
+### Continuous Improvement Framework
 
-**Machine Learning Integration**:
-Over time, the system will learn from analyst feedback and research outcomes:
+1. **Machine Learning Integration**:
+   Over time, the system will learn from analyst feedback and research outcomes:
 
 - **Source effectiveness modeling**: Predict which sources are most likely to contain useful information
 - **Query optimization**: Improve search query formulation based on successful searches
 - **Information prioritization**: Learn which types of biographical data are most valuable for disambiguation
 
-**Feedback Loop Implementation**:
+2. **Feedback Loop Implementation**:
 
 - **Analyst feedback collection**: Systematic collection of corrections and improvements from human analysts
 - **Research outcome tracking**: Monitor long-term accuracy of enriched matching decisions
@@ -384,8 +380,8 @@ Over time, the system will learn from analyst feedback and research outcomes:
 
 ### Important Note: Regulatory Compliance
 
-**Audit Trail Documentation**:
-Every research activity will be comprehensively logged:
+1. **Audit Trail Documentation**:
+   Every research activity will be comprehensively logged:
 
 - **Search queries executed**: Exact terms and sources queried
 - **Information extracted**: Specific biographical data points found
@@ -393,8 +389,8 @@ Every research activity will be comprehensively logged:
 - **Confidence assessments**: Scoring rationale for each data point
 - **Decision impact**: How enriched information affected final matching decision
 
-**Explainability Requirements**:
-All enriched information should include full attribution for analyst review:
+2. **Explainability Requirements**:
+   All enriched information should include full attribution for analyst review:
 
 - **Source identification**: Specific source and date of information extraction
 - **Extraction method**: How biographical data was identified and extracted
