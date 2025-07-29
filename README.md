@@ -160,7 +160,7 @@ docker compose logs -f
 docker compose down
 ```
 
-## Part 2 Report: Automated Web Research Enrichment
+## Part 2 Report
 
 This plan outlines a comprehensive system for automatically enriching adverse media screening with additional biographical data through intelligent web research. The approach addresses cases where critical disambiguating information (middle names, dates of birth, occupational details) is missing from the original article but may be found through targeted online research. The approach prioritizes efficiency, accuracy, and regulatory compliance while significantly reducing analyst manual research time.
 
@@ -207,21 +207,21 @@ The system will assume that relevant biographical information, if it exists, is 
 
 The system will trigger automated research based on specific conditions rather than researching every case:
 
-1. **Always Research When**:
+**Always Research When**:
 
 - Initial match probability between 40-80% (ambiguous cases)
 - Common names (frequency analysis of applicant database) with match probability >30%
 - High name similarity (>85%) but low contextual confidence (<60%)
 - Multiple potential matches identified in single article
 
-2. **Never Research When**:
+**Never Research When**:
 
 - Clear negative matches (<30% probability) - research unlikely to change outcome
 - Clear positive matches (>80% probability) - additional context not needed for decision
 - Previous research conducted within 90 days (cached results available)
 
-3. **Gap Analysis**:
-   The system will identify specific types of missing information that could improve disambiguation:
+**Gap Analysis**:
+The system will identify specific types of missing information that could improve disambiguation:
 
 - **Critical gaps**: Full legal names, dates of birth, unique identifiers
 - **Important gaps**: Current occupation, company affiliations, educational background
@@ -254,20 +254,20 @@ The system will trigger automated research based on specific conditions rather t
 
 #### Search Query Optimization
 
-1. **Context-Driven Query Generation**:
-   Searches will be tailored based on available context rather than using generic queries:
+**Context-Driven Query Generation**:
+Searches will be tailored based on available context rather than using generic queries:
 
 - **With company context**: "John Smith" + "Goldman Sachs" + "Executive"
 - **With location context**: "John Smith" + "New York" + "CEO"
 - **With industry context**: "John Smith" + "Technology" + "Startup"
 
-2. **Progressive Search Refinement**:
+**Progressive Search Refinement**:
 
 - Start with highly specific queries using all available context
 - Gradually broaden search terms if initial queries yield insufficient results
 - Stop searching when reliable information found or search quota exceeded
 
-3. **Negative Result Recognition**:
+**Negative Result Recognition**:
 
 - Cache unsuccessful search attempts to avoid repeating expensive queries
 - Recognize when common names require additional context for meaningful results
@@ -277,15 +277,15 @@ The system will trigger automated research based on specific conditions rather t
 
 #### Multi-Source Cross-Referencing
 
-1. **Consensus Building**:
-   The system will use a weighted consensus approach when multiple sources provide conflicting information:
+**Consensus Building**:
+The system will use a weighted consensus approach when multiple sources provide conflicting information:
 
 - **Source reliability weighting**: SEC filings weighted higher than social media
 - **Recency preference**: More recent information preferred for current status
 - **Corroboration bonus**: Information confirmed by multiple independent sources receives higher confidence
 
-2. **Contradiction Detection**:
-   The system will actively identify contradictory information across sources:
+**Contradiction Detection**:
+The system will actively identify contradictory information across sources:
 
 - **Temporal impossibilities**: Birth dates that don't align with career timelines
 - **Geographic conflicts**: Simultaneous presence in different locations
@@ -293,15 +293,15 @@ The system will trigger automated research based on specific conditions rather t
 
 #### Information Quality Scoring
 
-1. **Confidence Calculation Framework**:
-   Each piece of extracted information will receive a confidence score based on:
+**Confidence Calculation Framework**:
+Each piece of extracted information will receive a confidence score based on:
 
 - **Source authority** (SEC filing = 0.95, LinkedIn = 0.80, blog post = 0.30)
 - **Information specificity** (exact date = higher than approximate)
 - **Corroboration level** (confirmed by multiple sources = higher confidence)
 - **Extraction certainty** (structured data = higher than inferred information)
 
-2. **Quality Thresholds**:
+**Quality Thresholds**:
 
 - **High confidence**: >0.85 (suitable for automated decision enhancement)
 - **Medium confidence**: 0.60-0.85 (flagged for human review)
@@ -317,15 +317,15 @@ The system will trigger automated research based on specific conditions rather t
 
 #### Enhanced Matching Pipeline
 
-1. **Conditional Research Activation**: Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
+**Conditional Research Activation**: Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
 
 1. **Initial screening** produces ambiguous result (40-80% confidence)
-1. **Gap analysis** identifies specific missing information types
-1. **Research orchestrator** executes targeted searches based on gaps
-1. **Information validator** processes and validates findings
-1. **Enhanced matcher** re-evaluates with enriched biographical context
+2. **Gap analysis** identifies specific missing information types
+3. **Research orchestrator** executes targeted searches based on gaps
+4. **Information validator** processes and validates findings
+5. **Enhanced matcher** re-evaluates with enriched biographical context
 
-1. **Confidence Score Integration**: Enriched information will be integrated into the matching confidence calculation:
+**Confidence Score Integration**: Enriched information will be integrated into the matching confidence calculation:
 
 - **Supporting evidence**: Biographical alignment increases match confidence
 - **Contradictory evidence**: Inconsistencies decrease match confidence
@@ -333,15 +333,15 @@ The system will trigger automated research based on specific conditions rather t
 
 #### Decision Enhancement Logic
 
-1. **Positive Reinforcement**:
-   When enriched biographical data supports a potential match:
+**Positive Reinforcement**:
+When enriched biographical data supports a potential match:
 
 - **Age alignment**: Article age references match calculated age from birth date
 - **Occupational consistency**: Professional background aligns with article context
 - **Geographic coherence**: Location history consistent with article geography
 
-2. **Negative Evidence Processing**:
-   When enriched data contradicts a potential match:
+**Negative Evidence Processing**:
+When enriched data contradicts a potential match:
 
 - **Age inconsistency**: Significant discrepancy between article age and calculated age
 - **Professional contradiction**: Career background incompatible with article context
@@ -349,14 +349,14 @@ The system will trigger automated research based on specific conditions rather t
 
 ### Key Performance Indicators
 
-1. **Research Effectiveness Metrics**:
+**Research Effectiveness Metrics**:
 
 - **Information completion rate**: Percentage of cases successfully enriched with biographical data
 - **Disambiguation success rate**: Percentage of ambiguous cases resolved through research
 - **Source hit rate**: Success rate for different source types in providing useful information
 - **Research time efficiency**: Average time required for information extraction per case
 
-2. **Business Impact Metrics**:
+**Business Impact Metrics**:
 
 - **False positive reduction**: Decrease in false positives attributable to enriched information
 - **Analyst time savings**: Reduction in manual research time per case
@@ -365,14 +365,14 @@ The system will trigger automated research based on specific conditions rather t
 
 ### Continuous Improvement Framework
 
-1. **Machine Learning Integration**:
-   Over time, the system will learn from analyst feedback and research outcomes:
+**Machine Learning Integration**:
+Over time, the system will learn from analyst feedback and research outcomes:
 
 - **Source effectiveness modeling**: Predict which sources are most likely to contain useful information
 - **Query optimization**: Improve search query formulation based on successful searches
 - **Information prioritization**: Learn which types of biographical data are most valuable for disambiguation
 
-2. **Feedback Loop Implementation**:
+**Feedback Loop Implementation**:
 
 - **Analyst feedback collection**: Systematic collection of corrections and improvements from human analysts
 - **Research outcome tracking**: Monitor long-term accuracy of enriched matching decisions
@@ -380,8 +380,8 @@ The system will trigger automated research based on specific conditions rather t
 
 ### Important Note: Regulatory Compliance
 
-1. **Audit Trail Documentation**:
-   Every research activity will be comprehensively logged:
+**Audit Trail Documentation**:
+Every research activity will be comprehensively logged:
 
 - **Search queries executed**: Exact terms and sources queried
 - **Information extracted**: Specific biographical data points found
@@ -389,8 +389,8 @@ The system will trigger automated research based on specific conditions rather t
 - **Confidence assessments**: Scoring rationale for each data point
 - **Decision impact**: How enriched information affected final matching decision
 
-2. **Explainability Requirements**:
-   All enriched information should include full attribution for analyst review:
+**Explainability Requirements**:
+All enriched information should include full attribution for analyst review:
 
 - **Source identification**: Specific source and date of information extraction
 - **Extraction method**: How biographical data was identified and extracted
