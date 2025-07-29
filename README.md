@@ -6,13 +6,14 @@ Media Screening Tool is an adverse-media disambiguation system for regulated fin
 
 Financial institutions must screen large volumes of media with near-zero tolerance for missed true hits. Our design therefore optimizes for:
 
-1. Operational efficiency — automatically label unrelated articles as no_match to reduce analyst workload; and 2. Risk control — calibrate decision rules so a true positive is not labeled no_match (avoid false negatives).
+1. **Operational efficiency**: automatically label unrelated articles as no_match to reduce analyst workload
+2. **Risk control**: calibrate decision rules so a true positive is not labeled no_match (avoid false negatives).
 
 We frame the task as binary classification (match / no_match) for each (candidate, article) pair and tune the pipeline to achieve high recall on true positives while maintaining strong precision for the match label.
 
 ## Approach & Architecture
 
-### Stage 1 — Deterministic Filter
+### Stage 1: Deterministic Filter
 
 Purpose: cast a wide net to protect recall, and quickly produce no_match only when there is deterministic evidence the article is not about the candidate.
 
@@ -26,7 +27,7 @@ Decision use in Stage 1:
 - Output no_match only on rule-based contradictions (e.g., explicit DOB/age incompatible with the candidate, or complete absence of any strict variant/surname in the article).
 - For borderline cases (e.g., similarity score in the 60–79 band or soft conflicts), Stage 1 defers the decision to Stage 2.
 
-### Stage 2 — LLM Validator
+### Stage 2: LLM Validator
 
 Purpose: resolve borderline cases using a constrained, context-aware check.
 
@@ -161,7 +162,7 @@ docker compose down
 
 ## Part 2 Report: Automated Web Research Enrichment
 
-This plan outlines a comprehensive system for automatically enriching adverse media screening with additional biographical data through intelligent web research. The system addresses cases where critical disambiguating information (middle names, dates of birth, occupational details) is missing from the original article but may be found through targeted online research. The approach prioritizes efficiency, accuracy, and regulatory compliance while significantly reducing analyst manual research time.
+This plan outlines a comprehensive system for automatically enriching adverse media screening with additional biographical data through intelligent web research. The approach addresses cases where critical disambiguating information (middle names, dates of birth, occupational details) is missing from the original article but may be found through targeted online research. The approach prioritizes efficiency, accuracy, and regulatory compliance while significantly reducing analyst manual research time.
 
 ### Problem Definition and Scope
 
@@ -191,7 +192,7 @@ Validates, cross-references, and consolidates findings from multiple sources wit
 
 #### Core Assumption
 
-The system assumes that relevant biographical information, if it exists, is available in publicly accessible authoritative sources (government filings, professional networks, reputable news archives). Private or restricted information is explicitly out of scope.
+The system will assume that relevant biographical information, if it exists, is available in publicly accessible authoritative sources (government filings, professional networks, reputable news archives). Private or restricted information is explicitly out of scope.
 
 #### Core Processing Flow
 
@@ -204,7 +205,7 @@ The system assumes that relevant biographical information, if it exists, is avai
 
 #### Decision Logic
 
-The system triggers automated research based on specific conditions rather than researching every case:
+The system will trigger automated research based on specific conditions rather than researching every case:
 
 **Always Research When**:
 
@@ -220,15 +221,15 @@ The system triggers automated research based on specific conditions rather than 
 - Previous research conducted within 90 days (cached results available)
 
 **Gap Analysis**:
-The system identifies specific types of missing information that could improve disambiguation:
+The system will identify specific types of missing information that could improve disambiguation:
 
 - **Critical gaps**: Full legal names, dates of birth, unique identifiers
 - **Important gaps**: Current occupation, company affiliations, educational background
 - **Contextual gaps**: Historical locations, family connections, professional achievements
 
-#### Component 2: Multi-Source Research Engine
+### Component 2: Multi-Source Research Engine
 
-##### Source Hierarchy and Specialization
+#### Source Hierarchy and Specialization
 
 **Tier 1: Authoritative Government Sources (Reliability: 90-100%)**
 
@@ -251,10 +252,10 @@ The system identifies specific types of missing information that could improve d
 - Trade publications
 - Patent databases (USPTO)
 
-##### Search Query Optimization
+#### Search Query Optimization
 
 **Context-Driven Query Generation**:
-Searches are tailored based on available context rather than using generic queries:
+Searches will be tailored based on available context rather than using generic queries:
 
 - **With company context**: "John Smith" + "Goldman Sachs" + "Executive"
 - **With location context**: "John Smith" + "New York" + "CEO"
@@ -272,28 +273,28 @@ Searches are tailored based on available context rather than using generic queri
 - Recognize when common names require additional context for meaningful results
 - Flag cases where research is unlikely to yield actionable information
 
-#### Component 3: Information Validation Framework
+### Component 3: Information Validation Framework
 
-##### Multi-Source Cross-Referencing
+#### Multi-Source Cross-Referencing
 
-**Consensus Building Algorithm**:
-When multiple sources provide conflicting information, the system uses a weighted consensus approach:
+**Consensus Building**:
+The system will use a weighted consensus approach when multiple sources provide conflicting information:
 
 - **Source reliability weighting**: SEC filings weighted higher than social media
 - **Recency preference**: More recent information preferred for current status
 - **Corroboration bonus**: Information confirmed by multiple independent sources receives higher confidence
 
 **Contradiction Detection**:
-The system actively identifies contradictory information across sources:
+The system will actively identify contradictory information across sources:
 
 - **Temporal impossibilities**: Birth dates that don't align with career timelines
 - **Geographic conflicts**: Simultaneous presence in different locations
 - **Professional inconsistencies**: Career roles that don't follow logical progression
 
-##### Information Quality Scoring
+#### Information Quality Scoring
 
 **Confidence Calculation Framework**:
-Each piece of extracted information receives a confidence score based on:
+Each piece of extracted information will receive a confidence score based on:
 
 - **Source authority** (SEC filing = 0.95, LinkedIn = 0.80, blog post = 0.30)
 - **Information specificity** (exact date = higher than approximate)
@@ -306,18 +307,18 @@ Each piece of extracted information receives a confidence score based on:
 - **Medium confidence**: 0.60-0.85 (flagged for human review)
 - **Low confidence**: <0.60 (logged but not used for decision making)
 
-##### Temporal Consistency Validation
+#### Temporal Consistency Validation
 
-- Career timeline logic: Education → professional roles
+- Career timeline logic: Education align with professional roles
 - Age consistency: Professional achievements align with plausible ages
 - Date normalization: Standard formats for cross-reference
 
-#### Component 4: Integration with Core Matching System
+### Component 4: Integration with Core Matching System
 
-##### Enhanced Matching Pipeline
+#### Enhanced Matching Pipeline
 
 **Conditional Research Activation**:
-Research is triggered only when the initial matching system indicates potential value:
+Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
 
 1. **Initial screening** produces ambiguous result (40-80% confidence)
 2. **Gap analysis** identifies specific missing information types
@@ -326,13 +327,13 @@ Research is triggered only when the initial matching system indicates potential 
 5. **Enhanced matcher** re-evaluates with enriched biographical context
 
 **Confidence Score Integration**:
-Enriched information is integrated into the matching confidence calculation:
+Enriched information will be integrated into the matching confidence calculation:
 
 - **Supporting evidence**: Biographical alignment increases match confidence
 - **Contradictory evidence**: Inconsistencies decrease match confidence
 - **Information quality weighting**: Higher-quality sources have greater impact on confidence adjustment
 
-##### Decision Enhancement Logic
+#### Decision Enhancement Logic
 
 **Positive Reinforcement**:
 When enriched biographical data supports a potential match:
@@ -347,33 +348,6 @@ When enriched data contradicts a potential match:
 - **Age inconsistency**: Significant discrepancy between article age and calculated age
 - **Professional contradiction**: Career background incompatible with article context
 - **Geographic impossibility**: Location history incompatible with article events
-
-#### Enhanced Pipeline
-
-1. Initial screening produces ambiguous result
-2. Gap analysis identifies missing information
-3. Research engine executes targeted searches
-4. Validator processes findings with confidence scores
-5. Enhanced matcher re-evaluates with enriched context
-
-### Regulatory Compliance
-
-**Audit Trail Documentation**:
-Every research activity is comprehensively logged:
-
-- **Search queries executed**: Exact terms and sources queried
-- **Information extracted**: Specific biographical data points found
-- **Source attribution**: URLs and timestamps for all information sources
-- **Confidence assessments**: Scoring rationale for each data point
-- **Decision impact**: How enriched information affected final matching decision
-
-**Explainability Requirements**:
-All enriched information includes full attribution for analyst review:
-
-- **Source identification**: Specific source and date of information extraction
-- **Extraction method**: How biographical data was identified and extracted
-- **Confidence rationale**: Factors contributing to information confidence score
-- **Cross-reference status**: Whether information was corroborated by other sources
 
 ### Performance Monitoring and Optimization
 
@@ -396,7 +370,7 @@ All enriched information includes full attribution for analyst review:
 #### Continuous Improvement Framework
 
 **Machine Learning Integration**:
-Over time, the system learns from analyst feedback and research outcomes:
+Over time, the system will learn from analyst feedback and research outcomes:
 
 - **Source effectiveness modeling**: Predict which sources are most likely to contain useful information
 - **Query optimization**: Improve search query formulation based on successful searches
@@ -407,3 +381,22 @@ Over time, the system learns from analyst feedback and research outcomes:
 - **Analyst feedback collection**: Systematic collection of corrections and improvements from human analysts
 - **Research outcome tracking**: Monitor long-term accuracy of enriched matching decisions
 - **Source reliability updating**: Adjust source reliability scores based on information accuracy over time
+
+### Important Note: Regulatory Compliance
+
+**Audit Trail Documentation**:
+Every research activity will be comprehensively logged:
+
+- **Search queries executed**: Exact terms and sources queried
+- **Information extracted**: Specific biographical data points found
+- **Source attribution**: URLs and timestamps for all information sources
+- **Confidence assessments**: Scoring rationale for each data point
+- **Decision impact**: How enriched information affected final matching decision
+
+**Explainability Requirements**:
+All enriched information should include full attribution for analyst review:
+
+- **Source identification**: Specific source and date of information extraction
+- **Extraction method**: How biographical data was identified and extracted
+- **Confidence rationale**: Factors contributing to information confidence score
+- **Cross-reference status**: Whether information was corroborated by other sources
