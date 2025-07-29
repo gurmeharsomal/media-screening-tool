@@ -168,9 +168,11 @@ This plan outlines a comprehensive system for automatically enriching adverse me
 
 The current screening can often produce false positives when individuals share common names or when articles lack sufficient biographical context for confident disambiguation. Analysts currently spend significant time manually researching additional biographical details to determine whether an article refers to their specific applicant.
 
-#### Target Scenarios: Common name matches, insufficient biographical data, partial name matches, ambiguous references.
+#### Target Scenarios:
 
-#### Success Criteria
+Common name matches, insufficient biographical data, partial name matches, ambiguous references.
+
+#### Success Criteria:
 
 - **Disambiguation improvement**: Significant reduction in false positives through better context
 - **Research efficiency**: Significant reduction in manual research time for analysts
@@ -178,8 +180,6 @@ The current screening can often produce false positives when individuals share c
 - **Accuracy maintenance**: Zero increase in false negatives (missed true matches)
 
 ### System Architecture Overview
-
-#### Three-Layer Architecture
 
 **Layer 1: Intelligent Trigger System**
 Determines when automated research will provide value and what specific information to seek.
@@ -223,29 +223,29 @@ The system will trigger automated research based on specific conditions rather t
 **Gap Analysis**:
 The system will identify specific types of missing information that could improve disambiguation:
 
-- **Critical gaps**: Full legal names, dates of birth, unique identifiers
-- **Important gaps**: Current occupation, company affiliations, educational background
-- **Contextual gaps**: Historical locations, family connections, professional achievements
+- Critical gaps: Full legal names, dates of birth, unique identifiers
+- Important gaps: Current occupation, company affiliations, educational background
+- Contextual gaps: Historical locations, family connections, professional achievements
 
 ### Component 2: Multi-Source Research Engine
 
 #### Source Hierarchy and Specialization
 
-**Tier 1: Authoritative Government Sources (Reliability: 90-100%)**
+Tier 1: Authoritative Government Sources (Reliability: 90-100%)
 
 - SEC EDGAR: Executive biographies from proxy statements
 - Federal court records: PACER database
 - Professional licensing boards
 - Public property records
 
-**Tier 2: Professional and Corporate Sources (Reliability: 70-90%)**
+Tier 2: Professional and Corporate Sources (Reliability: 70-90%)
 
 - LinkedIn: Career histories and current positions
 - Corporate websites: Executive biography pages
 - Industry associations: Member directories
 - University directories (public information)
 
-**Tier 3: Media and Archive Sources (Reliability: 50-80%)**
+Tier 3: Media and Archive Sources (Reliability: 50-80%)
 
 - News archives with biographical references
 - Press release archives
@@ -254,20 +254,20 @@ The system will identify specific types of missing information that could improv
 
 #### Search Query Optimization
 
-**Context-Driven Query Generation**:
+Context-Driven Query Generation:
 Searches will be tailored based on available context rather than using generic queries:
 
 - **With company context**: "John Smith" + "Goldman Sachs" + "Executive"
 - **With location context**: "John Smith" + "New York" + "CEO"
 - **With industry context**: "John Smith" + "Technology" + "Startup"
 
-**Progressive Search Refinement**:
+Progressive Search Refinement:
 
 - Start with highly specific queries using all available context
 - Gradually broaden search terms if initial queries yield insufficient results
 - Stop searching when reliable information found or search quota exceeded
 
-**Negative Result Recognition**:
+Negative Result Recognition:
 
 - Cache unsuccessful search attempts to avoid repeating expensive queries
 - Recognize when common names require additional context for meaningful results
@@ -275,25 +275,25 @@ Searches will be tailored based on available context rather than using generic q
 
 ### Component 3: Information Validation Framework
 
-#### Multi-Source Cross-Referencing
+#### Multi-Source Cross-Referencing:
 
-**Consensus Building**:
+Consensus Building:
 The system will use a weighted consensus approach when multiple sources provide conflicting information:
 
 - **Source reliability weighting**: SEC filings weighted higher than social media
 - **Recency preference**: More recent information preferred for current status
 - **Corroboration bonus**: Information confirmed by multiple independent sources receives higher confidence
 
-**Contradiction Detection**:
+Contradiction Detection:
 The system will actively identify contradictory information across sources:
 
 - **Temporal impossibilities**: Birth dates that don't align with career timelines
 - **Geographic conflicts**: Simultaneous presence in different locations
 - **Professional inconsistencies**: Career roles that don't follow logical progression
 
-#### Information Quality Scoring
+#### Information Quality Scoring:
 
-**Confidence Calculation Framework**:
+Confidence Calculation Framework:
 Each piece of extracted information will receive a confidence score based on:
 
 - **Source authority** (SEC filing = 0.95, LinkedIn = 0.80, blog post = 0.30)
@@ -301,7 +301,7 @@ Each piece of extracted information will receive a confidence score based on:
 - **Corroboration level** (confirmed by multiple sources = higher confidence)
 - **Extraction certainty** (structured data = higher than inferred information)
 
-**Quality Thresholds**:
+Quality Thresholds:
 
 - **High confidence**: >0.85 (suitable for automated decision enhancement)
 - **Medium confidence**: 0.60-0.85 (flagged for human review)
@@ -315,9 +315,9 @@ Each piece of extracted information will receive a confidence score based on:
 
 ### Component 4: Integration with Core Matching System
 
-#### Enhanced Matching Pipeline
+#### Enhanced Matching Pipeline:
 
-**Conditional Research Activation**: Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
+Conditional Research Activation: Research will only be triggered when the initial matching system indicates potential value. This will be the enhanced pipeline:
 
 1. **Initial screening** produces ambiguous result (40-80% confidence)
 2. **Gap analysis** identifies specific missing information types
@@ -325,22 +325,22 @@ Each piece of extracted information will receive a confidence score based on:
 4. **Information validator** processes and validates findings
 5. **Enhanced matcher** re-evaluates with enriched biographical context
 
-**Confidence Score Integration**: Enriched information will be integrated into the matching confidence calculation:
+Confidence Score Integration: Enriched information will be integrated into the matching confidence calculation:
 
 - **Supporting evidence**: Biographical alignment increases match confidence
 - **Contradictory evidence**: Inconsistencies decrease match confidence
 - **Information quality weighting**: Higher-quality sources have greater impact on confidence adjustment
 
-#### Decision Enhancement Logic
+#### Decision Enhancement Logic:
 
-**Positive Reinforcement**:
+Positive Reinforcement:
 When enriched biographical data supports a potential match:
 
 - **Age alignment**: Article age references match calculated age from birth date
 - **Occupational consistency**: Professional background aligns with article context
 - **Geographic coherence**: Location history consistent with article geography
 
-**Negative Evidence Processing**:
+Negative Evidence Processing:
 When enriched data contradicts a potential match:
 
 - **Age inconsistency**: Significant discrepancy between article age and calculated age
