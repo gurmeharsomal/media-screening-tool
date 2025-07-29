@@ -209,31 +209,39 @@ def check_attribute_conflicts(candidate: Candidate, text: str, best_person: str)
         
         occupation_in_context = any(word in context_words for word in occupation_words if len(word) > 2)
         
-        occupation_indicators = {
-            "doctor": ["physician", "surgeon", "medical", "hospital", "clinic", "patient", "treatment", "dr.", "dr "],
+        occupation_groups = {
+            "doctor": ["physician", "surgeon", "cardiologist", "specialist", "pediatrician", "neurologist", "oncologist", "dermatologist", "psychiatrist", "medical", "hospital", "clinic", "patient", "treatment", "dr.", "dr "],
             "judge": ["court", "trial", "legal", "lawyer", "attorney", "prosecutor", "defendant", "judge", "judicial"],
-            "lawyer": ["attorney", "legal", "court", "trial", "law", "client", "case", "lawyer"],
-            "teacher": ["school", "education", "student", "classroom", "university", "professor", "teacher"],
-            "engineer": ["engineering", "technical", "construction", "design", "project", "engineer"],
+            "lawyer": ["attorney", "counsel", "prosecutor", "defense", "legal", "court", "trial", "law", "client", "lawyer"],
+            "teacher": ["professor", "instructor", "educator", "lecturer", "school", "education", "university", "teacher"],
+            "engineer": ["software engineer", "civil engineer", "mechanical engineer", "electrical engineer", "engineering", "engineer"],
             "manager": ["management", "executive", "director", "supervisor", "leadership", "manager"],
-            "police": ["officer", "law enforcement", "detective", "investigation", "arrest", "police"],
+            "police": ["officer", "detective", "investigator", "sergeant", "lieutenant", "law enforcement", "police"],
             "nurse": ["nursing", "medical", "hospital", "patient", "care", "healthcare", "nurse"]
         }
         
         candidate_occupation_lower = candidate.occupation.lower()
         conflicting_indicators = []
+        compatible_indicators = []
         
-        for profession, indicators in occupation_indicators.items():
-            if profession in candidate_occupation_lower:
+        for profession_group, indicators in occupation_groups.items():
+            if profession_group in candidate_occupation_lower:
+                for indicator in indicators:
+                    if indicator in person_context.lower():
+                        compatible_indicators.append(indicator)
+                break
+        
+        for profession_group, indicators in occupation_groups.items():
+            if profession_group not in candidate_occupation_lower:  # Different profession
                 for indicator in indicators:
                     if indicator in person_context.lower():
                         conflicting_indicators.append(indicator)
                         break
-                
-        if conflicting_indicators:
+        
+        if conflicting_indicators and not compatible_indicators:
             penalty += 40 
             explanation += f"Occupation conflict: candidate is '{candidate.occupation}' but context around '{best_person}' suggests different profession (found: {', '.join(conflicting_indicators)}). "
-        elif not occupation_in_context:
+        elif not occupation_in_context and not compatible_indicators:
             penalty += 20  
             explanation += f"Occupation '{candidate.occupation}' not found in context around '{best_person}'. "
     

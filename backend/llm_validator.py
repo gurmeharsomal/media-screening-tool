@@ -35,13 +35,16 @@ CRITICAL RULES:
 - If the name variant used in Stage 1 doesn't make logical sense (e.g., "Megan" vs "Michael"), this is likely a false positive.
 - A single name should not match a full name unless it's a clear nickname or initial.
 - Focus on the specific person mentioned in the article, not other people in the same context.
-- OCCUPATION CONFLICTS ARE AUTOMATIC DISQUALIFIERS: If the article clearly states a different profession than the candidate's occupation, this is a NO_MATCH regardless of name similarity.
+- OCCUPATION CONFLICTS ARE AUTOMATIC DISQUALIFIERS: If the article clearly states an INCOMPATIBLE profession (e.g., "Dr. X" vs attorney, "Judge Y" vs engineer), this is a NO_MATCH regardless of name similarity.
+- OCCUPATION COMPATIBILITY: Related professions are compatible (e.g., "doctor" vs "cardiologist", "teacher" vs "professor", "lawyer" vs "attorney").
 - Do NOT make excuses for occupation conflicts (e.g., "people can have multiple roles", "attorneys can be involved in healthcare"). If the article says "Dr. X" and candidate is an attorney, it's a NO_MATCH.
 - If there's any doubt about the connection, default to "no_match".
 
 DECISION FRAMEWORK:
-- "match": The excerpt explicitly mentions a name from allowed_variants and context is consistent.
-- "no_match": The excerpt lacks an allowed variant or contains contradictions.
+- "match": The excerpt explicitly mentions a name from allowed_variants AND context is consistent (no occupation conflicts, age conflicts, etc.)
+- "no_match": The excerpt lacks an allowed variant OR contains contradictions (occupation conflicts, age conflicts, etc.)
+
+IMPORTANT: Your "reasons" explanation must match your "decision". If you say "match" in decision, your reasons should explain why it's a match. If you say "no_match" in decision, your reasons should explain why it's not a match.
 
 ANALYSIS PRIORITIES:
 1. Contextual biographical alignment (age references, career timeline, locations)
@@ -87,8 +90,11 @@ NAME VALIDATION CHECKLIST:
 
 3. OCCUPATION CONFLICT CHECK (CRITICAL):
    - Does the article mention a different profession than the candidate's occupation?
-   - If YES, this is an automatic NO_MATCH regardless of name similarity
-   - Examples: "Dr. X" vs attorney, "Judge Y" vs engineer, "Professor Z" vs police officer
+   - Check if they are compatible (e.g., "doctor" vs "cardiologist" = compatible)
+   - Check if they are incompatible (e.g., "doctor" vs "attorney" = incompatible)
+   - If INCOMPATIBLE, this is an automatic NO_MATCH regardless of name similarity
+   - Examples of incompatibility: "Dr. X" vs attorney, "Judge Y" vs engineer, "Professor Z" vs police officer
+   - Examples of compatibility: "Dr. X, cardiologist" vs "X, doctor", "Professor Y" vs "Y, teacher"
    - Do NOT make excuses for occupation conflicts
 
 Based on the Stage 1 analysis above, determine if this article is about the candidate. Consider:
@@ -102,7 +108,11 @@ Based on the Stage 1 analysis above, determine if this article is about the cand
 
 Pay special attention to:
 - Age discrepancies (e.g., candidate born 1980 but article mentions 25-year-old)
-- OCCUPATION CONFLICTS: These are AUTOMATIC DISQUALIFIERS. If the article mentions a different profession (e.g., "Dr. Alex Morales" vs candidate attorney "Alex Morales"), this is an immediate NO_MATCH.
+- OCCUPATION CONFLICTS: These are AUTOMATIC DISQUALIFIERS for INCOMPATIBLE professions. However, COMPATIBLE professions are acceptable like:
+  * "Doctor" is compatible with: cardiologist, surgeon, physician, specialist, etc.
+  * "Teacher" is compatible with: professor, instructor, educator, etc.
+  * "Lawyer" is compatible with: attorney, counsel, prosecutor, etc.
+  * "Police" is compatible with: officer, detective, investigator, etc.
 - Timeline inconsistencies
 - Location or context mismatches
 - Name variant logic: If the candidate name variant doesn't make sense (e.g., "Megan" vs "Michael Tanner"), this is likely a false positive
@@ -111,9 +121,23 @@ Pay special attention to:
 - Check if the name variant is a reasonable expansion of the candidate's name
 
 OCCUPATION CONFLICT EXAMPLES:
-- Article: "Dr. Alex Morales, cardiology specialist" vs Candidate: "Alex Morales, attorney" → NO_MATCH
-- Article: "Judge Smith" vs Candidate: "John Smith, engineer" → NO_MATCH  
-- Article: "Professor Johnson" vs Candidate: "Robert Johnson, police officer" → NO_MATCH
+- Article: "Dr. Alex Morales, cardiology specialist" vs Candidate: "Alex Morales, attorney" is NO_MATCH
+- Article: "Judge Smith" vs Candidate: "John Smith, engineer" is NO_MATCH  
+- Article: "Professor Johnson" vs Candidate: "Robert Johnson, police officer" is NO_MATCH
+
+OCCUPATION COMPATIBILITY EXAMPLES (THESE ARE MATCHES):
+- Article: "Dr. Alex Morales, cardiology specialist" vs Candidate: "Alex Morales, doctor" is MATCH
+- Article: "Dr. Smith, surgeon" vs Candidate: "John Smith, physician" is MATCH
+- Article: "Professor Johnson, mathematics" vs Candidate: "Robert Johnson, teacher" is MATCH
+- Article: "Attorney Davis" vs Candidate: "Michael Davis, lawyer" is MATCH
+- Article: "Detective Wilson" vs Candidate: "Sarah Wilson, police officer" is MATCH
+
+OCCUPATION HIERARCHY RULES:
+- "Doctor" includes: physician, surgeon, cardiologist, specialist, pediatrician, etc.
+- "Teacher" includes: professor, instructor, educator, lecturer, etc.
+- "Lawyer" includes: attorney, counsel, prosecutor, defense attorney, etc.
+- "Police" includes: officer, detective, investigator, sergeant, etc.
+- "Engineer" includes: software engineer, civil engineer, mechanical engineer, etc.
 
 Do NOT rationalize occupation conflicts with excuses like "people can have multiple roles" or "professionals can be involved in different fields".
 
